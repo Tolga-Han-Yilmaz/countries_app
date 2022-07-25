@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AllSearch from "../components/AllSearch";
-import CapitalSearch from "../components/CapitalSearch";
 import CountriesList from "../components/CountriesList";
 
 const url = "https://restcountries.com/v2/all";
@@ -30,10 +29,7 @@ const Home = () => {
         setCountries={setCountries}
         setFilterCountries={setFilterCountries}
       />
-      <CapitalSearch
-        setFilterCountries={setFilterCountries}
-        countries={countries}
-      />
+
       {loading ? (
         <p>loading</p>
       ) : (
