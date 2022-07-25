@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AllSearch from "../components/AllSearch";
 import CountriesList from "../components/CountriesList";
+import loadingGif from "../assets/loading.gif";
+import NavBar from "../components/NavBar";
 
 const url = "https://restcountries.com/v2/all";
 
@@ -9,6 +11,7 @@ const Home = () => {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filterCountries, setFilterCountries] = useState("");
+  const [selectBarControl, setSelectBarControl] = useState(true);
 
   useEffect(() => {
     getCountries(url);
@@ -24,19 +27,22 @@ const Home = () => {
   };
   return (
     <div>
-      <AllSearch
-        countries={countries}
-        setCountries={setCountries}
-        setFilterCountries={setFilterCountries}
-      />
-
+      <NavBar />
       {loading ? (
-        <p>loading</p>
+        <img src={loadingGif} alt="loading" />
       ) : (
-        <CountriesList
-          countries={countries}
-          filterCountries={filterCountries}
-        />
+        <div>
+          <AllSearch
+            setFilterCountries={setFilterCountries}
+            setSelectBarControl={setSelectBarControl}
+            selectBarControl={selectBarControl}
+          />
+          <CountriesList
+            countries={countries}
+            filterCountries={filterCountries}
+            selectBarControl={selectBarControl}
+          />
+        </div>
       )}
     </div>
   );
