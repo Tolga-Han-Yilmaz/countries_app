@@ -9,6 +9,7 @@ const url = "https://restcountries.com/v2/all";
 const Home = () => {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filterCountries, setFilterCountries] = useState("");
 
   useEffect(() => {
     getCountries(url);
@@ -24,12 +25,22 @@ const Home = () => {
   };
   return (
     <div>
-      <AllSearch />
-      <CapitalSearch />
+      <AllSearch
+        countries={countries}
+        setCountries={setCountries}
+        setFilterCountries={setFilterCountries}
+      />
+      <CapitalSearch
+        setFilterCountries={setFilterCountries}
+        countries={countries}
+      />
       {loading ? (
         <p>loading</p>
       ) : (
-        <CountriesList countries={countries} setCountries={setCountries} />
+        <CountriesList
+          countries={countries}
+          filterCountries={filterCountries}
+        />
       )}
     </div>
   );

@@ -1,9 +1,7 @@
-import { useState } from "react";
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 
-const CountriesList = ({ countries, setCountries }) => {
-  const [filterCountries, setFilterCountries] = useState("");
+const CountriesList = ({ countries, filterCountries }) => {
   const filteredCountries = countries.filter((item) => {
     return Object.keys(item).some((key) =>
       item[key].toString().toLowerCase().includes(filterCountries.toLowerCase())
