@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { Table } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
+import Image from "react-bootstrap/Image";
 
 const CountriesList = ({ countries, setCountries }) => {
-  const [filteredCountries, setFilteredCountries] = useState("");
+  const [filterCountries, setFilterCountries] = useState("");
+  const filteredCountries = countries.filter((item) => {
+    return Object.keys(item).some((key) =>
+      item[key].toString().toLowerCase().includes(filterCountries.toLowerCase())
+    );
+  });
 
   return (
-    <div>
+    <div className="container">
       <Table striped bordered hover>
-        <thead>
+        <thead className="text-center">
           <tr>
             <th>#</th>
             <th>Flag</th>
@@ -17,23 +23,29 @@ const CountriesList = ({ countries, setCountries }) => {
           </tr>
         </thead>
         <tbody>
-          {}
+          {filteredCountries?.map((country, index) => {
+            const {
+              flags: { png },
+              name,
+              capital,
+              region,
+            } = country;
+            return (
+              <tr key={index} className="text-center">
+                <td>{index + 1}</td>
+                <td>
+                  <Image src={png} alt={name} fluid width="150px" />
+                </td>
+                <td>{name}</td>
+                <td>{capital}</td>
+                <td>{region}</td>
+              </tr>
+            );
+          })}
           <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
+            <td colSpan={4} className="text-center">
+              <h3>Total Countries : {filteredCountries.length}</h3>
+            </td>
           </tr>
         </tbody>
       </Table>
