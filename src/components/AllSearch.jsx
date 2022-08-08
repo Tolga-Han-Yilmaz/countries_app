@@ -1,8 +1,11 @@
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 const AllSearch = ({
   setFilterCountries,
   setSelectBarControl,
   selectBarControl,
+  setSearch,
+  filterCountries,
 }) => {
   const handleSelectBar = (e) => {
     switch (e.target.value) {
@@ -14,9 +17,14 @@ const AllSearch = ({
         break;
     }
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearch(filterCountries);
+  };
   return (
     <div className="d-flex flex-column align-items-center my-5">
-      <Form>
+      <Form onSubmit={handleSearch}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control
             onChange={(e) => setFilterCountries(e.target.value)}
@@ -32,6 +40,9 @@ const AllSearch = ({
             <option value="capital">Capital</option>
           </Form.Select>
         </Form.Group>
+        <Button type="submit" variant="outline-success" className="w-100">
+          Search
+        </Button>
       </Form>
     </div>
   );

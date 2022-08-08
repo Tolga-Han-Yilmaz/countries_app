@@ -1,23 +1,58 @@
+/* eslint-disable no-extend-native */
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
+import { useMemo } from "react";
 
-const CountriesList = ({ countries, filterCountries, selectBarControl }) => {
-  const filteredAll = countries.filter((item) => {
-    return Object.keys(item).some((key) =>
-      item[key].toString().toLowerCase().includes(filterCountries.toLowerCase())
-    );
-  });
+const CountriesList = ({
+  countries,
+  filterCountries,
+  selectBarControl,
+  search,
+}) => {
+  String.prototype.turkishtoEnglish = function () {
+    return this.replace("Ğ", "g")
+      .replaceAll("Ü", "u")
+      .replaceAll("Ş", "s")
+      .replaceAll("I", "i")
+      .replaceAll("İ", "i")
+      .replaceAll("Ö", "o")
+      .replaceAll("Ç", "c")
+      .replaceAll("ğ", "g")
+      .replaceAll("ü", "u")
+      .replaceAll("ş", "s")
+      .replaceAll("ı", "i")
+      .replaceAll("ö", "o")
+      .replaceAll("ç", "c");
+  };
 
-  const filteredCapital = countries.filter((item) => {
-    return Object.keys(item).some(
-      (key) =>
-        key === "capital" &&
-        item["capital"]
-          .toString()
-          .toLowerCase()
-          .includes(filterCountries.toLowerCase())
-    );
-  });
+  const filteredAll = useMemo(
+    () =>
+      countries.filter((item) => {
+        console.log("rwgrw");
+        return Object.keys(item).some((key) =>
+          item[key]
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase().turkishtoEnglish())
+        );
+      }),
+    [search]
+  );
+
+  const filteredCapital = useMemo(
+    () =>
+      countries.filter((item) => {
+        return Object.keys(item).some(
+          (key) =>
+            key === "capital" &&
+            item["capital"]
+              .toString()
+              .toLowerCase()
+              .includes(search.toLowerCase())
+        );
+      }),
+    [search]
+  );
 
   return (
     <div className="container">

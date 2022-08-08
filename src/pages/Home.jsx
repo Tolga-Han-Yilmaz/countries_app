@@ -12,7 +12,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [filterCountries, setFilterCountries] = useState("");
   const [selectBarControl, setSelectBarControl] = useState(true);
-
+  const [search, setSearch] = useState("");
   useEffect(() => {
     getCountries(url);
   }, []);
@@ -36,11 +36,14 @@ const Home = () => {
             setFilterCountries={setFilterCountries}
             setSelectBarControl={setSelectBarControl}
             selectBarControl={selectBarControl}
+            setSearch={setSearch}
+            filterCountries={filterCountries}
           />
           <CountriesList
             countries={countries}
             filterCountries={filterCountries}
             selectBarControl={selectBarControl}
+            search={search}
           />
         </div>
       )}

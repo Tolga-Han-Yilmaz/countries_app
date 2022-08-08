@@ -7,3 +7,5 @@
     - The first is the search to cover all the data in the api,
     - The second is the search by capital of the countries,
     - I used Bootstrap for design.
+
+- 2 kere render problemi çözümü için -->https://stackoverflow.com/questions/71900135/react-useeffect-shows-mounting-of-component-in-2-times
