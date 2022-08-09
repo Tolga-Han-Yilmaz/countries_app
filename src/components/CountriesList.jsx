@@ -5,6 +5,7 @@ import Image from "react-bootstrap/Image";
 import { useMemo } from "react";
 
 const CountriesList = ({ countries, selectBarControl, search }) => {
+  // Türkçe karakter problemi çözümü için
   String.prototype.turkishtoEnglish = function () {
     return this.replace("Ğ", "g")
       .replaceAll("Ü", "u")
@@ -21,6 +22,8 @@ const CountriesList = ({ countries, selectBarControl, search }) => {
       .replaceAll("ç", "c");
   };
 
+  // Arama JSON yapısındaki bütün verileri içermektedir
+  // İstek tekrarına düşmeden arama yapmak için useMemo Hook'u kullanıldı
   const filteredAll = useMemo(
     () =>
       countries.filter((item) =>
@@ -61,9 +64,12 @@ const CountriesList = ({ countries, selectBarControl, search }) => {
         })
       ),
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [search]
   );
 
+  // Arama JSON yapısındaki başkentlere göre yapmaktadır
+  // İstek tekrarına düşmeden arama yapmak için useMemo Hook'u kullanıldı
   const filteredCapital = useMemo(
     () =>
       countries.filter((item) => {
@@ -92,7 +98,6 @@ const CountriesList = ({ countries, selectBarControl, search }) => {
           </tr>
         </thead>
         <tbody>
-          {/* {console.log(filteredAll)} */}
           {selectBarControl
             ? filteredAll?.map((country, index) => {
                 const {

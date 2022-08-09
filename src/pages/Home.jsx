@@ -8,11 +8,13 @@ import NavBar from "../components/NavBar";
 const url = "https://restcountries.com/v2/all";
 
 const Home = () => {
+  // state
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filterCountries, setFilterCountries] = useState("");
   const [selectBarControl, setSelectBarControl] = useState(true);
   const [search, setSearch] = useState("");
+
   useEffect(() => {
     getCountries(url);
   }, []);
