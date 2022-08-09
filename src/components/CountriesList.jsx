@@ -27,15 +27,43 @@ const CountriesList = ({
 
   const filteredAll = useMemo(
     () =>
-      countries.filter((item) => {
-        console.log(Object.values(item).map((value) => value));
-        return Object.keys(item).some((key) =>
-          item[key]
-            .toString()
-            .toLowerCase()
-            .includes(search.toLowerCase().turkishtoEnglish())
-        );
-      }),
+      countries.filter((item) =>
+        Object.keys(item).some((key) => {
+          if (typeof item[key] == "string") {
+            console.log(5);
+            return item[key]
+              .toString()
+              .toLowerCase()
+              .includes(search.toLowerCase().turkishtoEnglish());
+          } else if (typeof item[key] == "object") {
+            console.log(75);
+            if (Array.isArray(item[key])) {
+              console.log(item[key]);
+              return item[key].some((i) =>
+                typeof i == "object"
+                  ? Object.values(i).some((j) =>
+                      j
+                        .toString()
+                        .toLowerCase()
+                        .includes(search.toLowerCase().turkishtoEnglish())
+                    )
+                  : i
+                      .toString()
+                      .toLowerCase()
+                      .includes(search.toLowerCase().turkishtoEnglish())
+              );
+            } else {
+              console.log(Object.values(item));
+              return Object.values(item).some((k) =>
+                k
+                  .toString()
+                  .toLowerCase()
+                  .includes(search.toLowerCase().turkishtoEnglish())
+              );
+            }
+          }
+        })
+      ),
 
     [search]
   );
