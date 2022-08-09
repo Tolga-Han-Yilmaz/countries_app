@@ -51,7 +51,6 @@ const CountriesList = ({ countries, selectBarControl, search }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [search]
   );
-
   return (
     <div className="container">
       <Table striped bordered hover>
@@ -65,6 +64,7 @@ const CountriesList = ({ countries, selectBarControl, search }) => {
           </tr>
         </thead>
         <tbody>
+          {/* {console.log(filteredAll)} */}
           {selectBarControl
             ? filteredAll?.map((country, index) => {
                 const {
