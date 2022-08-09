@@ -23,7 +23,6 @@ const CountriesList = ({ countries, selectBarControl, search }) => {
 
   const filteredAll = useMemo(
     () =>
-<<<<<<< HEAD
       countries.filter((item) =>
         Object.keys(item).some((key) => {
           if (typeof item[key] == "string") {
@@ -61,17 +60,6 @@ const CountriesList = ({ countries, selectBarControl, search }) => {
           }
         })
       ),
-=======
-      countries.filter((item) => {
-        console.log(Object.values(item).map((value) => value));
-        return Object.keys(item).some((key) =>
-          item[key]
-            .toString()
-            .toLowerCase()
-            .includes(search.toLowerCase().turkishtoEnglish())
-        );
-      }),
->>>>>>> master
 
     [search]
   );
