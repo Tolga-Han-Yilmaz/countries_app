@@ -25,6 +25,7 @@ const Home = () => {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   };
+
   return (
     <div>
       <NavBar />

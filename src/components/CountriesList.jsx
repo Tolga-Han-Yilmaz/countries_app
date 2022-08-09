@@ -28,7 +28,7 @@ const CountriesList = ({
   const filteredAll = useMemo(
     () =>
       countries.filter((item) => {
-        console.log("rwgrw");
+        console.log(Object.values(item).map((value) => value));
         return Object.keys(item).some((key) =>
           item[key]
             .toString()
@@ -36,6 +36,7 @@ const CountriesList = ({
             .includes(search.toLowerCase().turkishtoEnglish())
         );
       }),
+
     [search]
   );
 
@@ -53,7 +54,6 @@ const CountriesList = ({
       }),
     [search]
   );
-
   return (
     <div className="container">
       <Table striped bordered hover>
@@ -67,6 +67,7 @@ const CountriesList = ({
           </tr>
         </thead>
         <tbody>
+          {/* {console.log(filteredAll)} */}
           {selectBarControl
             ? filteredAll?.map((country, index) => {
                 const {
