@@ -1,14 +1,10 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-extend-native */
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import { useMemo } from "react";
 
-const CountriesList = ({
-  countries,
-  filterCountries,
-  selectBarControl,
-  search,
-}) => {
+const CountriesList = ({ countries, selectBarControl, search }) => {
   String.prototype.turkishtoEnglish = function () {
     return this.replace("Ğ", "g")
       .replaceAll("Ü", "u")
@@ -28,7 +24,7 @@ const CountriesList = ({
   const filteredAll = useMemo(
     () =>
       countries.filter((item) => {
-        console.log("rwgrw");
+        console.log(Object.values(item).map((value) => value));
         return Object.keys(item).some((key) =>
           item[key]
             .toString()
@@ -36,6 +32,7 @@ const CountriesList = ({
             .includes(search.toLowerCase().turkishtoEnglish())
         );
       }),
+
     [search]
   );
 
@@ -51,6 +48,7 @@ const CountriesList = ({
               .includes(search.toLowerCase())
         );
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [search]
   );
 
